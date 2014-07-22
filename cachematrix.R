@@ -1,10 +1,10 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Functions created for creating a class that can cache a matrix and it's inverse
 
-## Write a short comment describing this function
+## This function encapsulates a matrix and it's inverse, if available
 
 makeCacheMatrix <- function(x = matrix()) {
     inversematrix <- NULL
+    ##Basic access methods - get and set 
     set <- function(y) {
         x <<- y
         inversematrix <<- NULL
@@ -18,10 +18,9 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## This function os used to calculate and set the inverse of a makeCacheMatrix object
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
     inversematrix <- x$getinverse()
     datamatrix <- x$get()
     ##check to see if matrix is square
@@ -38,12 +37,12 @@ cacheSolve <- function(x, ...) {
         return(x)
     }
     else if(!is.null(inversematrix)){
-        ##get cached
+        ##return cached inverse matrix
         message("Returning cached inverse")
         return(inversematrix)
     }
         
-    
+    ##Solve AX = I
     inversematrix <- solve(datamatrix, diag(nrow=dims[1], ncol=dims[2]), ...)
     x$setinverse(inversematrix)
     inversematrix
